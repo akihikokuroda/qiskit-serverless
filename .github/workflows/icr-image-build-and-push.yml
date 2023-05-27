@@ -2,7 +2,10 @@ name: Helm Package
 
 on:
   workflow_dispatch:
-
+    inputs:
+      tag:
+        description: 'Tag for release'
+        required: true
 jobs:
   package:
     runs-on: ubuntu-latest
@@ -27,8 +30,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          tag_name: ${{ github.event.inputs.tag }}
+          release_name: Release ${{ github.event.inputs.tag }}
           draft: false
           prerelease: false
       - name: Upload Release Asset
