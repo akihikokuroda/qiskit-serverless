@@ -153,6 +153,16 @@ data:
               - mountPath: /fluent-bit/etc/fluent-bit.conf
                 name: fluentbit-config
                 subPath: fluent-bit.conf
+            - image: "{{ .Values.proxy.repository }}:{{ .Values.proxy.tag | default .Chart.AppVersion }}"
+              args: [ "gunicorn", "main.wsgi:application", "--bind", "0.0.0.0:{{ .Values.service.port }}", "--workers=1" ]
+              name: primitive-proxy
+              resources:
+                limits:
+                  cpu: 100m
+                  memory: 128Mi
+                requests:
+                  cpu: 100m
+                  memory: 128Mi
             imagePullSecrets: []
 {{- if .Values.useCertManager }}
             serviceAccountName: ray-cluster-sa
@@ -310,6 +320,16 @@ data:
                   cpu: {{ .Values.application.ray.cpu }}
                   memory: {{ .Values.application.ray.memory }}Gi
               securityContext:
+            - image: "{{ .Values.proxy.repository }}:{{ .Values.proxy.tag | default .Chart.AppVersion }}"
+              args: [ "gunicorn", "main.wsgi:application", "--bind", "0.0.0.0:{{ .Values.service.port }}", "--workers=1" ]
+              name: primitive-proxy
+              resources:
+                limits:
+                  cpu: 100m
+                  memory: 128Mi
+                requests:
+                  cpu: 100m
+                  memory: 128Mi
             imagePullSecrets: []
 {{- if .Values.useCertManager }}
             serviceAccountName: ray-cluster-sa
