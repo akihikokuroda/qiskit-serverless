@@ -38,7 +38,6 @@ Core abstractions
     RayJobClient
     save_result
     QiskitPattern
-    Program
     ProgramStorage
     ProgramRepository
     download_and_unpack_artifact
@@ -65,10 +64,10 @@ from .provider import (
 from .job import BaseJobClient, RayJobClient, GatewayJobClient, Job, save_result
 from .pattern import (
     QiskitPattern,
-    Program,
     ProgramStorage,
     ProgramRepository,
     download_and_unpack_artifact,
+    Configuration,
 )
 from .decorators import (
     remote,
