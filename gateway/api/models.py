@@ -51,6 +51,7 @@ class ProgramConfig(models.Model):
     worker_mem = models.IntegerField(
         null=True, validators=[MinValueValidator(0), MaxValueValidator(5)]
     )
+    python_version = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.id

@@ -39,6 +39,7 @@ def save_programconfig(request) -> ProgramConfig:
         worker_cpu=2,
         worker_mem=3,
         auto_scaling=settings.RAY_CLUSTER_WORKER_AUTO_SCALING,
+        python_version=settings.RAY_PYTHON_VERSION,
     )
     if request.data.get("config"):
         config_data = json.loads(request.data.get("config"))
@@ -54,6 +55,8 @@ def save_programconfig(request) -> ProgramConfig:
             programconfig.worker_mem = config_data["worker_mem"]
         if "auto_scaling" in config_data and config_data["auto_scaling"]:
             programconfig.auto_scaling = config_data["auto_scaling"]
+        if "python_version" in config_data and config_data["python_version"]:
+            programconfig.python_version = config_data["python_version"]
     programconfig.full_clean()
     programconfig.save()
     return programconfig

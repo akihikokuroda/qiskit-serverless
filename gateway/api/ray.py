@@ -177,11 +177,14 @@ def create_ray_cluster(
     namespace = settings.RAY_KUBERAY_NAMESPACE
     cluster_name = cluster_name or f"{user.username}-{str(uuid.uuid4())[:8]}"
     if not cluster_data:
+        py_version = program_config.python_version
+        node_image = settings.RAY_NODE_IMAGE[: settings.RAY_NODE_IMAGE.rindex("-")] + "-" + py_version
         cluster = get_template("rayclustertemplate.yaml")
         manifest = cluster.render(
             {
                 "cluster_name": cluster_name,
                 "user_id": user.username,
+                "node_image": node_image,
                 "workers": program_config.workers,
                 "min_workers": program_config.min_workers,
                 "max_workers": program_config.max_workers,

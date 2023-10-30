@@ -18,6 +18,7 @@ class ProgramConfigSerializer(serializers.ProgramSerializer):
             "worker_cpu",
             "worker_mem",
             "auto_scaling",
+            "python_version",
         ]
 
 
