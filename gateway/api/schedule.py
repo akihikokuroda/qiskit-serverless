@@ -36,7 +36,7 @@ def save_programconfig(request) -> ProgramConfig:
         workers=settings.RAY_CLUSTER_WORKER_REPLICAS,
         min_workers=settings.RAY_CLUSTER_WORKER_MIN_REPLICAS,
         max_workers=settings.RAY_CLUSTER_WORKER_MAX_REPLICAS,
-        worker_cpu=2,
+        worker_cpu=0,
         worker_mem=3,
         auto_scaling=settings.RAY_CLUSTER_WORKER_AUTO_SCALING,
     )
@@ -119,7 +119,7 @@ def execute_job(job: Job) -> Job:
         if authors_resource:
             try:
                 job.compute_resource = authors_resource
-                job = submit_job(job)
+                job = submit_job(job, program_config=job.program.config)
                 job.status = Job.PENDING
             except (
                 Exception  # pylint: disable=broad-exception-caught
@@ -145,7 +145,7 @@ def execute_job(job: Job) -> Job:
             if compute_resource:
                 # if compute resource was created in time with no problems
                 job.compute_resource = compute_resource
-                job = submit_job(job)
+                job = submit_job(job, program_config=job.program.config)
                 job.status = Job.PENDING
             else:
                 # if something went wrong

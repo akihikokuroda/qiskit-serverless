@@ -59,7 +59,11 @@ class JobHandler:
             error_message=f"Runtime error during stopping of ray job [{ray_job_id}]",
         )
 
-    def submit(self, job: Job) -> Optional[str]:
+    def submit(
+        self,
+        job: Job,
+        program_config: Optional[ProgramConfig] = None,
+    ) -> Optional[str]:
         """Submit job as ray job.
 
         Args:
@@ -95,6 +99,7 @@ class JobHandler:
                         "env_vars": decrypt_env_vars(env_w_span),
                         "pip": dependencies or [],
                     },
+                    entrypoint_num_cpus=program_config.worker_cpu,
                 ),
                 num_retries=settings.RAY_SETUP_MAX_RETRIES,
                 error_message=f"Ray job [{job.id}] submission failed.",
@@ -126,7 +131,7 @@ def get_job_handler(host: str) -> Optional[JobHandler]:
     )
 
 
-def submit_job(job: Job) -> Job:
+def submit_job(job: Job, program_config: Optional[ProgramConfig] = None) -> Job:
     """Submits job to ray cluster.
 
     Args:
@@ -144,7 +149,7 @@ def submit_job(job: Job) -> Job:
             f"Unable to set up ray client with host [{job.compute_resource.host}]"
         )
 
-    ray_job_id = ray_client.submit(job)
+    ray_job_id = ray_client.submit(job, program_config=job.program.config)
     if ray_job_id is None:
         logger.error("Unable to submit ray job [%s]", job.id)
         raise ConnectionError(f"Unable to submit ray job [{job.id}]")
