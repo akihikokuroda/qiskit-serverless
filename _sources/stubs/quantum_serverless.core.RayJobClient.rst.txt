@@ -14,13 +14,17 @@
    .. autosummary::
    
       ~RayJobClient.__init__
+      ~RayJobClient.filtered_logs
       ~RayJobClient.get
+      ~RayJobClient.get_programs
       ~RayJobClient.list
       ~RayJobClient.logs
       ~RayJobClient.result
       ~RayJobClient.run
+      ~RayJobClient.run_existing
       ~RayJobClient.status
       ~RayJobClient.stop
+      ~RayJobClient.upload
    
    
 

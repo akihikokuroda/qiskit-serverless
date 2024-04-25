@@ -14,13 +14,17 @@
    .. autosummary::
    
       ~BaseJobClient.__init__
+      ~BaseJobClient.filtered_logs
       ~BaseJobClient.get
+      ~BaseJobClient.get_programs
       ~BaseJobClient.list
       ~BaseJobClient.logs
       ~BaseJobClient.result
       ~BaseJobClient.run
+      ~BaseJobClient.run_existing
       ~BaseJobClient.status
       ~BaseJobClient.stop
+      ~BaseJobClient.upload
    
    
 
