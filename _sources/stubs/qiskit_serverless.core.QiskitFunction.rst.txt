@@ -1,0 +1,44 @@
+﻿qiskit\_serverless.core.QiskitFunction
+======================================
+
+.. currentmodule:: qiskit_serverless.core
+
+.. autoclass:: QiskitFunction
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~QiskitFunction.__init__
+      ~QiskitFunction.from_json
+      ~QiskitFunction.get_jobs
+      ~QiskitFunction.run
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~QiskitFunction.dependencies
+      ~QiskitFunction.description
+      ~QiskitFunction.entrypoint
+      ~QiskitFunction.env_vars
+      ~QiskitFunction.image
+      ~QiskitFunction.job_client
+      ~QiskitFunction.provider
+      ~QiskitFunction.raw_data
+      ~QiskitFunction.schema
+      ~QiskitFunction.tags
+      ~QiskitFunction.validate
+      ~QiskitFunction.version
+      ~QiskitFunction.working_dir
+      ~QiskitFunction.title
+   
+   
